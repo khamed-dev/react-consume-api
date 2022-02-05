@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import {  createContext } from 'react';
+import { useInput } from './helpers/useInput';
 import './App.css';
+import Header from './components/Header';
+import Body from './components/Body';
+import { getImagesFromPixabayApi } from './API/PIXABAY_API';
+
+export const InputContext = createContext();
 
 function App() {
+
+
+
+
+  const { value: valueOfQ, onChange: onChangeInputQ } = useInput("");
+  const { value: valueOfImage, onChange: onChangeInputImage } = useInput("");
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <InputContext.Provider value={{ valueOfQ, onChangeInputQ, valueOfImage, onChangeInputImage }}>
+        <Header />
+        <Body />
+      </InputContext.Provider>
     </div>
   );
 }

@@ -7,7 +7,6 @@ const RegularListWithUrl = ({
     url
 }) => {
     const [loading, resources, error] = useGetFetch(url);
-    console.log(resources);
     const { hits } = resources || [];
     console.log(hits)
     const prevUrlRef = useRef();

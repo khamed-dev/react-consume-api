@@ -1,4 +1,4 @@
-const API_KEY = "13882338-d93b145945134ef80bc1b14a3";
+const API_KEY = "";
 const BASE_ULR="https://pixabay.com/api/";
 export const URL=`${BASE_ULR}?key=${API_KEY}`;
 

@@ -9,30 +9,29 @@ function _makeReqeust(value) {
     return value.length >= 3;
 }
 
-function _getValueQAndImageType() {
-    const { inputQ, inputImageType } = useContext(InputContext);
-    return [inputQ.value, inputImageType.value];
-}
+
 
 const pixabayProps = {
     componentToEnhance: RegularList,
-    fetResourceFunc: () => getImagesFromPixabayApi(..._getValueQAndImageType()),
-    extractData: (object) => object.hits,
+    extractData: object => _extractHits(object),
     resourceName: "pixabay"
+}
+
+function _extractHits(obj){
+    return obj.hits;
 }
 
 
 const Body = () => {
 
-    const [valueOfQ, valueOfImage] = _getValueQAndImageType();
-
-    useEffect(() => {
-    }, [valueOfQ, valueOfImage]);
+    const { inputQ, inputImageType } = useContext(InputContext);
+    const valueOfQ = inputQ.value;
+    const valueOfImage = inputImageType.value;
 
     return (_makeReqeust(valueOfQ) || _makeReqeust(valueOfImage))
-        ? <div className="ui grid container"><GetDataSource {...pixabayProps} /></div>
+        ? <div className="ui grid container"><GetDataSource {...pixabayProps}
+            fetResourceFunc={() => getImagesFromPixabayApi(valueOfQ, valueOfImage)} /></div>
         : null;
-
 }
 
 

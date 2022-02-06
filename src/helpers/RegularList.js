@@ -1,4 +1,3 @@
-import { memo } from 'react';
 const RegularList = ({
 	items,
 	resourceName,
@@ -13,4 +12,4 @@ const RegularList = ({
 	)
 }
 
-export default memo(RegularList);
+export default RegularList;

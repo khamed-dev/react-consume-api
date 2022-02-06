@@ -9,7 +9,7 @@ export const useGetFetch = (fetResourceFunc, extractData) => {
         setLoading(true);
         (async () => {
             try {
-                const response = await fetResourceFunc;
+                const response = await fetResourceFunc();
                 const data = await response.json();
                 setResource(extractData(data));
                 setLoading(false);

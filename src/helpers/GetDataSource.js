@@ -6,7 +6,7 @@ import PixabayItem from '../components/PixabayItem';
 const returnLoading = () => <div><p>Loading...</p></div>;
 const returnError = () => <div><p>error getting the data...</p></div>;
 
-const GetDataSource = ({ componentToEnhance: EnhancedComponent, fetResourceFunc, extractData, resourceName }) => {
+function GetDataSource({ componentToEnhance: EnhancedComponent, fetResourceFunc, extractData, resourceName }) {
    const [loading,resources,error] = useGetFetch(fetResourceFunc,extractData);
     
     if (loading) return returnLoading();

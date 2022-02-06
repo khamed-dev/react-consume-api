@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const useGetFetch = resourceURL => {
+export const useGetFetch = (fetResourceFunc, extractData) => {
     const [resource, setResource] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -9,9 +9,9 @@ export const useGetFetch = resourceURL => {
         setLoading(true);
         (async () => {
             try {
-                const response = await fetch(resourceURL);
+                const response = await fetResourceFunc;
                 const data = await response.json();
-                setResource(data);
+                setResource(extractData(data));
                 setLoading(false);
                 setError(false);
             } catch (error) {
@@ -19,7 +19,7 @@ export const useGetFetch = resourceURL => {
                 setLoading(false);
             }
         })();
-    }, [resourceURL]);
+    }, [fetResourceFunc]);
 
     return [loading, resource, error];
 }

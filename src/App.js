@@ -3,22 +3,23 @@ import { useInput } from './helpers/useInput';
 import './App.css';
 import Header from './components/Header';
 import Body from './components/Body';
-import { getImagesFromPixabayApi } from './API/PIXABAY_API';
 
 export const InputContext = createContext();
 
 function App() {
 
 
+  {/*{ value: valueOfQ, onChange: onChangeInputQ }
+{ value: valueOfImage, onChange: onChangeInputImage } 
+*/}
 
-
-  const { value: valueOfQ, onChange: onChangeInputQ } = useInput("");
-  const { value: valueOfImage, onChange: onChangeInputImage } = useInput("");
+  const inputQ = useInput("");
+  const inputImageType= useInput("");
 
 
   return (
     <div className="App">
-      <InputContext.Provider value={{ valueOfQ, onChangeInputQ, valueOfImage, onChangeInputImage }}>
+      <InputContext.Provider value={{ inputQ, inputImageType}}>
         <Header />
         <Body />
       </InputContext.Provider>

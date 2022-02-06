@@ -4,7 +4,6 @@ const RegularList = ({
 	resourceName,
 	itemComponent: ItemComponent,
 }) => {
-	console.log("Regukalar list called")
 	return (
 		<>
 			{items.map((item) => (

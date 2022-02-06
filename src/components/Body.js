@@ -1,23 +1,37 @@
 
-import { URL } from '../API/PIXABAY_API';
-import { useEffect, useContext, useState } from "react";
+import { getImagesFromPixabayApi } from '../API/PIXABAY_API';
+import { useEffect, useContext } from "react";
 import { InputContext } from '../App';
-import RegularListWithUrl from '../helpers/RegularListWithUrl';
+import GetDataSource from '../helpers/GetDataSource';
+import RegularList from '../helpers/RegularList';
+
+function _makeReqeust(value) {
+    return value.length >= 3;
+}
+
+function _getValueQAndImageType() {
+    const { inputQ, inputImageType } = useContext(InputContext);
+    return [inputQ.value, inputImageType.value];
+}
+
+const pixabayProps = {
+    componentToEnhance: RegularList,
+    fetResourceFunc: () => getImagesFromPixabayApi(..._getValueQAndImageType()),
+    extractData: (object) => object.hits,
+    resourceName: "pixabay"
+}
+
 
 const Body = () => {
 
-    const [url, setUrl] = useState("");
-    const { valueOfQ, valueOfImage } = useContext(InputContext);
-    function _makeReqeust(value) {
-        return value.length >= 3;
-    }
-    useEffect(() => {
-        if (_makeReqeust(valueOfQ) || _makeReqeust(valueOfImage))
-            setUrl(`${URL}&q=${valueOfQ}&image_type=${valueOfImage}`)
+    const [valueOfQ, valueOfImage] = _getValueQAndImageType();
 
+    useEffect(() => {
     }, [valueOfQ, valueOfImage]);
 
-    return <RegularListWithUrl url={url} />
+    return (_makeReqeust(valueOfQ) || _makeReqeust(valueOfImage))
+        ? <div className="ui grid container"><GetDataSource {...pixabayProps} /></div>
+        : null;
 
 }
 

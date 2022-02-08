@@ -1,7 +1,7 @@
 
 import { getImagesFromPixabayApi } from '../API/PIXABAY_API';
-import { useEffect, useContext } from "react";
-import { InputContext } from '../App';
+import {  useContext } from "react";
+import { InputContext } from '../contexts/InputContextProvide';
 import GetDataSource from '../helpers/GetDataSource';
 import RegularList from '../helpers/RegularList';
 
@@ -10,13 +10,11 @@ function _makeReqeust(value) {
 }
 
 
-
 const pixabayProps = {
     componentToEnhance: RegularList,
-    extractData: object => _extractHits(object),
+    extractDataFunc: object => _extractHits(object),
     resourceName: "pixabay"
 }
-
 function _extractHits(obj){
     return obj.hits;
 }

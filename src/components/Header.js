@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { InputContext } from '../App';
+
+import { InputContext } from '../contexts/InputContextProvide';
 
 
 const Header = () => {
